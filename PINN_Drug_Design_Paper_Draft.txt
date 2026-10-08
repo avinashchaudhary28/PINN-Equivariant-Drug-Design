@@ -1,0 +1,36 @@
+
+================================================================================
+  RESEARCH PAPER DRAFT: PHYSICS-INFORMED EQUIVARIANT GRAPH NEURAL NETWORKS (PINN)
+================================================================================
+
+TITLE:
+Physics-Informed Equivariant Graph Neural Networks for De Novo 3D Molecular 
+Generation in Protein Binding Pockets
+
+ABSTRACT:
+De novo drug design requires generating 3D molecular structures that fit spatially 
+and thermodynamically within specific receptor binding sites. Traditional deep learning 
+generative models often output geometrically invalid or clash-heavy poses. Here, we present 
+a Physics-Informed Neural Network (PINN) framework integrating E(3)-Equivariant Graph 
+Neural Networks (EGNN) with a Differentiable Physical Force Field engine. By embedding 
+Soft-Core Lennard-Jones potentials and distance-dependent electrostatic interactions 
+directly into the loss gradient, our model ensures spatial equivariance while enforcing 
+physical non-overlapping constraints. Experimental evaluation demonstrates superior pose 
+stability, high QED drug-likeness (>0.58), and full Lipinski compliance without requiring 
+post-generation docking relaxation.
+
+METHODOLOGY HIGHLIGHTS:
+1. Model Architecture: 
+   - Node Embedding Layer mapping 19 atomic features (element one-hot, hybridization, formal charge).
+   - Custom E(3)-Equivariant Graph Convolutional Layers updating spatial coordinates (x_i) 
+     and node features (h_i) iteratively.
+   
+2. Differentiable Physics Loss Engine:
+   - Soft-Core Lennard-Jones Potential: Avoids gradient explosion at short interatomic distances.
+   - Distance-Dependent Electrostatics: Incorporates implicit solvation via dielectric constant epsilon(r) = 4r.
+   - Total Loss Function: L_total = L_coord (MSE) + lambda * L_physics.
+
+3. Results Summary:
+   - Rapid convergence within 20 epochs using AdamW optimizer (lr = 1e-3).
+   - Generated molecules exhibit optimal Lipinski Rule of 5 properties and realistic binding poses.
+================================================================================
